@@ -818,6 +818,14 @@
 
   .hf-submit:hover { background: #a50d24; transform: translateY(-1px); }
 
+  @media (max-width: 960px) {
+    .hero-form-wrap { padding: 20px 16px; }
+    .hf-row { grid-template-columns: 1fr; }
+    .hf-input { font-size: 14px; padding: 10px 12px; width: 100%; box-sizing: border-box; }
+    .hf-submit { font-size: 12px; padding: 13px 16px; }
+    .hero-form { gap: 8px; }
+  }
+
   .hf-success {
     display: flex;
     flex-direction: column;
