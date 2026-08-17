@@ -1044,10 +1044,10 @@
       <div class="hero-form-label">Request a Free Consultation</div>
       <form class="hero-form" onsubmit="handleFormSubmit(event)">
         <div class="hf-row">
-          <input class="hf-input" id="hfFirstName" type="text" placeholder="First Name" required>
-          <input class="hf-input" id="hfLastName" type="text" placeholder="Last Name" required>
+          <input class="hf-input" id="hfFirstName" name="first_name" type="text" placeholder="First Name" required>
+          <input class="hf-input" id="hfLastName" name="last_name" type="text" placeholder="Last Name" required>
         </div>
-        <input class="hf-input" type="text" placeholder="Company Name" required>
+        <input class="hf-input" name="company" type="text" placeholder="Company Name" required>
         <div class="hf-phone-row">
           <select class="hf-country" id="hfCountry">
             <option value="+90">🇹🇷 +90</option>
@@ -1279,8 +1279,8 @@
           </select>
           <input class="hf-phone-num" id="hfPhone" type="tel" placeholder="Phone Number" inputmode="numeric">
         </div>
-        <input class="hf-input" id="hfEmail" type="email" placeholder="Email Address" required>
-        <textarea class="hf-input hf-textarea" placeholder="Your Message (product type, capacity needs…)" rows="3"></textarea>
+        <input class="hf-input" id="hfEmail" name="email" type="email" placeholder="Email Address" required>
+        <textarea class="hf-input hf-textarea" name="message" placeholder="Your Message (product type, capacity needs…)" rows="3"></textarea>
         <button class="hf-submit" type="submit">
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l6 5 6-5M2 4h12v9H2V4z"/></svg>
           Send Request
@@ -1630,8 +1630,46 @@
 function handleFormSubmit(e) {
   e.preventDefault();
   var form = e.target;
-  form.style.display = 'none';
-  document.getElementById('hfSuccess').style.display = 'flex';
+  var btn = form.querySelector('.hf-submit');
+  var firstName = document.getElementById('hfFirstName').value;
+  var lastName  = document.getElementById('hfLastName').value;
+  var countryCode = document.getElementById('hfCountry').value;
+  var phone = document.getElementById('hfPhone').value;
+  var email = document.getElementById('hfEmail').value;
+  var company = form.querySelector('[name="company"]').value;
+  var message = form.querySelector('[name="message"]').value;
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  fetch('https://formsubmit.co/ajax/anil@no7software.co.uk', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      name: firstName + ' ' + lastName,
+      email: email,
+      phone: countryCode + ' ' + phone,
+      company: company,
+      message: message,
+      _subject: 'New Consultation Request — DKİ Makine'
+    })
+  })
+  .then(function(res){ return res.json(); })
+  .then(function(data){
+    if (data.success === 'true' || data.success === true) {
+      form.style.display = 'none';
+      document.getElementById('hfSuccess').style.display = 'flex';
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Send Request';
+      alert('Something went wrong. Please try again.');
+    }
+  })
+  .catch(function(){
+    btn.disabled = false;
+    btn.textContent = 'Send Request';
+    alert('Network error. Please try again.');
+  });
 }
 </script>
 </body>
