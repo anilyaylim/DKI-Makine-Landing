@@ -1158,7 +1158,7 @@
   }
   .machine-parade-track svg { flex-shrink: 0; }
   .nav-menu-parade { display: none; }
-  .nav-mobile-parade { display: none; }
+  @media (min-width: 961px) { .nav-mobile-parade { display: none; } }
   .nav-mobile-parade-track { display: flex; align-items: flex-end; height: 100%; width: max-content; animation: machineMarch 12s linear infinite; }
   .nav-mobile-parade-track svg { flex-shrink: 0; }
   @keyframes machineMarch {
@@ -1768,12 +1768,17 @@
 (function(){
   var toggle = document.getElementById('navToggle');
   var links  = document.getElementById('navLinks');
+  var parade = document.querySelector('.nav-mobile-parade');
   if (toggle) {
     toggle.addEventListener('click', function(){
-      links.classList.toggle('open');
+      var isOpen = links.classList.toggle('open');
+      if (parade) parade.style.display = isOpen ? 'none' : '';
     });
     links.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ links.classList.remove('open'); });
+      a.addEventListener('click', function(){
+        links.classList.remove('open');
+        if (parade) parade.style.display = '';
+      });
     });
   }
 })();
