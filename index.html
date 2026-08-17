@@ -1037,8 +1037,8 @@
       <div class="hero-form-label">Request a Free Consultation</div>
       <form class="hero-form" onsubmit="handleFormSubmit(event)">
         <div class="hf-row">
-          <input class="hf-input" type="text" placeholder="First Name" required>
-          <input class="hf-input" type="text" placeholder="Last Name" required>
+          <input class="hf-input" id="hfFirstName" type="text" placeholder="First Name" required>
+          <input class="hf-input" id="hfLastName" type="text" placeholder="Last Name" required>
         </div>
         <input class="hf-input" type="text" placeholder="Company Name" required>
         <div class="hf-phone-row">
@@ -1068,7 +1068,7 @@
           </select>
           <input class="hf-phone-num" id="hfPhone" type="tel" placeholder="Phone Number" inputmode="numeric">
         </div>
-        <input class="hf-input" type="email" placeholder="Email Address" required>
+        <input class="hf-input" id="hfEmail" type="email" placeholder="Email Address" required>
         <textarea class="hf-input hf-textarea" placeholder="Your Message (product type, capacity needs…)" rows="3"></textarea>
         <button class="hf-submit" type="submit">
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l6 5 6-5M2 4h12v9H2V4z"/></svg>
@@ -1374,6 +1374,46 @@
       this.value += text.replace(/[^0-9]/g, '');
     });
   }
+})();
+
+// Name fields — letters, spaces, hyphens, apostrophes only (incl. Turkish chars)
+(function(){
+  function restrictToLetters(input) {
+    input.addEventListener('keydown', function(e){
+      var allowed = ['Backspace','Delete','Tab','Enter','ArrowLeft','ArrowRight','Home','End',' '];
+      if (allowed.indexOf(e.key) !== -1) return;
+      if (e.ctrlKey || e.metaKey) return;
+      if (!/^[\p{L}\-']+$/u.test(e.key)) e.preventDefault();
+    });
+    input.addEventListener('input', function(){
+      this.value = this.value.replace(/[^\p{L}\s\-']/gu, '');
+    });
+    input.addEventListener('paste', function(e){
+      e.preventDefault();
+      var text = (e.clipboardData || window.clipboardData).getData('text');
+      this.value += text.replace(/[^\p{L}\s\-']/gu, '');
+    });
+  }
+  var fn = document.getElementById('hfFirstName');
+  var ln = document.getElementById('hfLastName');
+  if (fn) restrictToLetters(fn);
+  if (ln) restrictToLetters(ln);
+})();
+
+// Email — show inline error if @ is missing on blur
+(function(){
+  var emailInput = document.getElementById('hfEmail');
+  if (!emailInput) return;
+  var errEl = document.createElement('span');
+  errEl.style.cssText = 'color:#ff6b6b;font-size:11px;margin-top:-6px;display:none;';
+  errEl.textContent = 'Please include @ in the email address.';
+  emailInput.parentNode.insertBefore(errEl, emailInput.nextSibling);
+  emailInput.addEventListener('blur', function(){
+    errEl.style.display = (this.value && !this.value.includes('@')) ? 'block' : 'none';
+  });
+  emailInput.addEventListener('input', function(){
+    if (this.value.includes('@')) errEl.style.display = 'none';
+  });
 })();
 
 function handleFormSubmit(e) {
