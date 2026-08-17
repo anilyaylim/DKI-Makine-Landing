@@ -921,21 +921,19 @@
   }
 
   .hf-close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
     color: #fff;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
+    border-radius: 6px;
+    padding: 10px 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     transition: background 0.2s;
+    margin-top: 8px;
   }
   .hf-close:hover { background: rgba(255,255,255,0.22); }
 
@@ -949,7 +947,6 @@
     color: #fff;
     text-align: center;
     font-size: 16px;
-    position: relative;
   }
 
   /* ── DKİ Logo Animations ── */
@@ -1308,10 +1305,10 @@
         </button>
       </form>
       <div class="hf-success" id="hfSuccess" style="display:none;">
-        <button class="hf-close" onclick="document.getElementById('hfSuccess').style.display='none'; document.querySelector('.hero-form').style.display='flex'; document.querySelector('.hero-form').reset();" aria-label="Close">&#x2715;</button>
         <svg viewBox="0 0 320 140" width="260" height="114" fill="none" role="img" aria-label="DKİ — Microwave Technology"><text x="49" y="89" font-family="'Barlow Condensed', Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="82" fill="#FFFFFF">DKİ</text><g transform="translate(159,4) scale(0.56)"><circle cx="100" cy="100" r="78" stroke="#FFFFFF" stroke-width="2.4"/><ellipse cx="100" cy="100" rx="78" ry="26" stroke="#FFFFFF" stroke-width="1.4" opacity=".75"/><path d="M31.3 61.5H168.7" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"/><path d="M31.3 138.5H168.7" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"/><path d="M56.5 34H143.5" stroke="#FFFFFF" stroke-width="1.4" opacity=".35"/><path d="M56.5 166H143.5" stroke="#FFFFFF" stroke-width="1.4" opacity=".35"/><ellipse class="dki-mer" style="animation-delay:0s" cx="100" cy="100" rx="78" ry="78" stroke="#FFFFFF" stroke-width="1.4" opacity=".6"/><ellipse class="dki-mer" style="animation-delay:-3.25s" cx="100" cy="100" rx="78" ry="78" stroke="#FFFFFF" stroke-width="1.4" opacity=".6"/><ellipse class="dki-mer" style="animation-delay:-6.5s" cx="100" cy="100" rx="78" ry="78" stroke="#FFFFFF" stroke-width="1.4" opacity=".6"/><ellipse class="dki-mer" style="animation-delay:-9.75s" cx="100" cy="100" rx="78" ry="78" stroke="#FFFFFF" stroke-width="1.4" opacity=".6"/><ellipse class="dki-mer" style="animation-delay:-13s" cx="100" cy="100" rx="78" ry="78" stroke="#FFFFFF" stroke-width="1.4" opacity=".6"/><ellipse class="dki-mer" style="animation-delay:-16.25s" cx="100" cy="100" rx="78" ry="78" stroke="#FFFFFF" stroke-width="1.4" opacity=".6"/><circle class="dki-ring" style="animation-delay:0s" cx="110" cy="78" r="13" stroke="#C8102E" stroke-width="2"/><circle class="dki-ring" style="animation-delay:-1.05s" cx="110" cy="78" r="13" stroke="#C8102E" stroke-width="2"/><circle class="dki-ring" style="animation-delay:-2.1s" cx="110" cy="78" r="13" stroke="#C8102E" stroke-width="2"/><g class="dki-tr" transform="translate(90,69.5) scale(0.2667)"><path fill="#C8102E" d="M2.3 4 L15.7 1 L16.5 4 L24.3 9 L42.3 9 L58.7 2 L71.6 0.5 L80.6 8 L97 12 L107.2 11 L121.3 6 L136.2 10 L140.9 21 L147.1 24 L144 38 L143.2 42 L137 48 L128.4 48 L125.3 49 L109.6 52 L94 54 L83.8 53 L79.9 62 L77.5 55 L67.3 53 L61.9 58 L53.2 61 L43.1 53 L36 52 L29 59 L24.3 55 L18 54 L11 51 L9.4 42 L6.3 37 L5.5 26 L1.6 20 L5.5 17 L1.6 15 Z"/></g></g><rect x="29.5" y="125" width="24" height="2" fill="#C8102E"/><text x="65.5" y="130" font-family="Barlow, 'Helvetica Neue', Arial, sans-serif" font-weight="300" font-size="12.5" letter-spacing="4" fill="#FFFFFF" fill-opacity="0.86">MICROWAVE TECHNOLOGY</text></svg>
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
         <p>Thank you! We'll be in touch within 24 hours.</p>
+        <button class="hf-close" onclick="document.getElementById('hfSuccess').style.display='none'; document.querySelector('.hero-form').style.display='flex'; document.querySelector('.hero-form').reset();">Send Another Request</button>
       </div>
     </div>
 
