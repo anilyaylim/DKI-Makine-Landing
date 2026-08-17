@@ -133,7 +133,7 @@
         rgba(200,16,46,0.18) 54px
       );
       background-size: 54px 100%;
-      animation: beltMove 1.4s linear infinite;
+      animation: navBeltMove 1.4s linear infinite;
     }
     .nav-links {
       position: fixed;
@@ -255,6 +255,10 @@
   @keyframes beltMove {
     from { background-position: 0 0; }
     to   { background-position: 60px 0; }
+  }
+  @keyframes navBeltMove {
+    from { background-position: 0 0; }
+    to   { background-position: 54px 0; }
   }
 
   /* ── Hero content ── */
